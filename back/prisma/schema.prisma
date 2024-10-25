@@ -14,13 +14,33 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
+  id       String    @id @unique @default(uuid())
+  email    String    @unique
+  password String
+  username String    @unique
+  posts    Post[]
+  comments Comment[]
 }
 
 model Post {
-  id String @id @default(uuid())
+  id           Int       @id @default(autoincrement())
+  User         User      @relation(fields: [userName], references: [username])
+  userName     String
+  title        String    @db.VarChar(255)
+  content      String
+  comments     Comment[]
+  creationTime DateTime  @default(now())
+
+  @@unique([id, userName])
 }
 
 model Comment {
-  id String @id @default(uuid())
+  id       Int    @id @default(autoincrement())
+  User     User   @relation(fields: [userName], references: [username])
+  userName String
+  Post     Post   @relation(fields: [postId], references: [id])
+  postId   Int
+  content  String
+
+  @@unique([id, userName, postId])
 }

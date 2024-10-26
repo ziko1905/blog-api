@@ -35,16 +35,21 @@ async function createPost(title, content, username) {
 }
 
 async function updatePost(postId, title, content) {
-  return await client.post.update({
-    where: {
-      id: postId,
-    },
+  try {
+    return await client.post.update({
+      where: {
+        id: postId,
+      },
 
-    data: {
-      title: title,
-      content: content,
-    },
-  });
+      data: {
+        title: title,
+        content: content,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    throw new PostNotFound("Couldn't find post to update.");
+  }
 }
 
 async function deletePost(postId) {

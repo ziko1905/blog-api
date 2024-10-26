@@ -30,7 +30,7 @@ module.exports.createPost = [
       req.body.content,
       req.user.username
     );
-    res.send({ redirect: `${req.originalUrl}/${post.id}` });
+    res.send({ redirect: `${req.originalUrl}${post.id}` });
   }),
 ];
 
@@ -47,3 +47,9 @@ module.exports.updatePost = [
     res.send(post);
   }),
 ];
+
+module.exports.deletePost = asyncHandler(async (req, res) => {
+  const postId = +req.params.postId;
+  await queries.deletePost(postId);
+  res.send({ redirect: "/posts" });
+});

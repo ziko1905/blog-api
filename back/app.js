@@ -24,7 +24,8 @@ app.use("/posts", routes.postRouter);
 
 app.use((err, req, res, next) => {
   console.log(err);
-  res.send({ msg: "Error occurred on server. Please try again." });
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).send({ msg: err.message });
 });
 
 const PORT = process.env.PORT || 3000;

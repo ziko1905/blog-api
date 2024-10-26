@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const client = new PrismaClient();
+const { PostNotFound } = require("../errors");
 
 // Testing purposes, acts like connect or create
 module.exports.createTest = async () =>
@@ -46,6 +47,19 @@ async function updatePost(postId, title, content) {
   });
 }
 
+async function deletePost(postId) {
+  try {
+    return await client.post.delete({
+      where: {
+        id: postId,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    throw new PostNotFound("Could't find post to delete");
+  }
+}
+
 async function findPostByTitle(title) {
   return await client.post.findFirst({
     where: {
@@ -60,4 +74,5 @@ module.exports = {
   createPost,
   updatePost,
   findPostByTitle,
+  deletePost,
 };

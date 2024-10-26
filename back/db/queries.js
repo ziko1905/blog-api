@@ -17,29 +17,33 @@ module.exports.createTest = async () =>
   });
 
 async function getUserByUsername(username) {
-  try {
-    return client.user.findFirst({
-      where: {
-        username: username,
-      },
-    });
-  } catch (err) {
-    console.log(err);
+  const user = await client.user.findFirst({
+    where: {
+      username: username,
+    },
+  });
+  if (!user) {
     throw new CustomNotFound(`Couldn't find user with ${username} username.`);
   }
+
+  return user;
 }
 
 async function getPostsByUsername(username) {
-  try {
-    return client.post.findMany({
-      where: {
-        userName: username,
-      },
-    });
-  } catch (err) {
-    console.log(err);
+  const user = await client.user.findFirst({
+    where: {
+      username: username,
+    },
+    include: {
+      posts: true,
+    },
+  });
+
+  if (!user) {
     throw new CustomNotFound(`Couldn't find user posts of ${username}.`);
   }
+
+  return user.posts;
 }
 
 async function getAllPosts() {
@@ -167,7 +171,6 @@ async function deleteComment(commentId) {
       },
     });
   } catch (err) {
-    console.log("JUST PROVING THAT CATHC IN ASYNC FUNCT QUERY IS WORKING");
     console.log(err);
     throw new CustomNotFound("Couldn't find comment to delete.");
   }

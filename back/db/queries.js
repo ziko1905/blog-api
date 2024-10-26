@@ -68,6 +68,20 @@ async function findPostByTitle(title) {
   });
 }
 
+async function getAllComments(postId) {
+  try {
+    return client.comment.findMany({
+      where: {
+        postId: postId,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    // Not sure if needed bcs of how API will be used
+    throw new PostNotFound("Couldn't find post.");
+  }
+}
+
 module.exports = {
   ...module.exports,
   getAllPosts,
@@ -75,4 +89,5 @@ module.exports = {
   updatePost,
   findPostByTitle,
   deletePost,
+  getAllComments,
 };

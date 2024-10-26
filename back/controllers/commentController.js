@@ -34,3 +34,7 @@ module.exports.updateComment = [
     );
   }),
 ];
+
+module.exports.deleteComment = asyncHandler(async (req, res) => {
+  res.send(await queries.deleteComment(+req.params.commentId));
+});

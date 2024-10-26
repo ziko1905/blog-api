@@ -116,7 +116,20 @@ async function updateComment(commentId, content) {
   } catch (err) {
     console.log(err);
     // Not sure if needed bcs of how API will be used
-    throw new CommentNotFound("Couldn't find comment to update.");
+    throw new CustomNotFound("Couldn't find comment to update.");
+  }
+}
+
+async function deleteComment(commentId) {
+  try {
+    return client.comment.delete({
+      where: {
+        id: commentId,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    throw new CustomNotFound("Couldn't find comment to delete.");
   }
 }
 
@@ -130,4 +143,5 @@ module.exports = {
   getAllComments,
   createComment,
   updateComment,
+  deleteComment,
 };

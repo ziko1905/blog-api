@@ -30,7 +30,8 @@ module.exports.createPost = [
       req.body.content,
       req.user.username
     );
-    res.send({ redirect: `${req.originalUrl}${post.id}` });
+    console.log(req);
+    res.send({ redirect: `${req.baseUrl}/${post.id}` });
   }),
 ];
 

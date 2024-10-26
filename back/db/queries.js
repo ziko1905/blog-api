@@ -16,6 +16,16 @@ module.exports.createTest = async () =>
     update: {},
   });
 
+async function createUser(username, email, password) {
+  return await client.user.create({
+    data: {
+      username: username,
+      email: email,
+      password: password,
+    },
+  });
+}
+
 async function getUserByUsername(username) {
   const user = await client.user.findFirst({
     where: {
@@ -27,6 +37,35 @@ async function getUserByUsername(username) {
   }
 
   return user;
+}
+
+async function getUserByEmail(email) {
+  const user = await client.user.findFirst({
+    where: {
+      email: email,
+    },
+  });
+  if (!user) {
+    throw new CustomNotFound(`Couldn't find user with ${username} username.`);
+  }
+
+  return user;
+}
+
+async function userExistsByUsername(username) {
+  return !!(await client.user.findFirst({
+    where: {
+      username: username,
+    },
+  }));
+}
+
+async function userExistsByEmail(email) {
+  return !!(await client.user.findFirst({
+    where: {
+      email: email,
+    },
+  }));
 }
 
 async function getPostsByUsername(username) {
@@ -178,7 +217,11 @@ async function deleteComment(commentId) {
 
 module.exports = {
   ...module.exports,
+  createUser,
   getUserByUsername,
+  getUserByEmail,
+  userExistsByUsername,
+  userExistsByEmail,
   getPostsByUsername,
   getAllPosts,
   getPostById,

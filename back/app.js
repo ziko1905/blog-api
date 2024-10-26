@@ -17,8 +17,7 @@ app.use(async (req, res, next) => {
   }
 });
 
-// WIP: commented till developed
-// app.use("/", routes.authRouter);
+app.use("/", routes.authRouter);
 app.use("/users", routes.userRouter);
 app.use("/posts", routes.postRouter);
 

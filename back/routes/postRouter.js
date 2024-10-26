@@ -6,6 +6,7 @@ const router = Router();
 
 // How much posts, all...(for endpoint when testing requests), could be specified by queries, for pagination
 router.get("/", postController.allPostsGet);
-router.post("/", postController.createPostPost);
+router.post("/", postController.createPost);
+router.put("/:postId", postController.updatePost);
 
 module.exports = router;

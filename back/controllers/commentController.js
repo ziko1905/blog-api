@@ -8,7 +8,7 @@ validateComment = [
 ];
 
 module.exports.getAllComments = asyncHandler(async (req, res) => {
-  res.send(await queries.getAllComments());
+  res.send(await queries.getAllComments(+req.params.postId));
 });
 
 module.exports.createComment = [

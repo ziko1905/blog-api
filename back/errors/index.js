@@ -1,5 +1,5 @@
-const PostNotFound = require("./PostNotFound");
+const CustomNotFound = require("./CustomNotFound");
 
 module.exports = {
-  PostNotFound,
+  CustomNotFound,
 };

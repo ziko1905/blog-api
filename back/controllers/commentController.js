@@ -24,3 +24,13 @@ module.exports.createComment = [
     );
   }),
 ];
+
+module.exports.updateComment = [
+  validateComment,
+  validationMiddleware,
+  asyncHandler(async (req, res) => {
+    return res.send(
+      await queries.updateComment(+req.params.commentId, req.body.content)
+    );
+  }),
+];

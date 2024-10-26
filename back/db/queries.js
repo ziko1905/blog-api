@@ -1,6 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const client = new PrismaClient();
-const { PostNotFound } = require("../errors");
+const { CustomNotFound } = require("../errors");
 
 // Testing purposes, acts like connect or create
 module.exports.createTest = async () =>
@@ -48,7 +48,7 @@ async function updatePost(postId, title, content) {
     });
   } catch (err) {
     console.log(err);
-    throw new PostNotFound("Couldn't find post to update.");
+    throw new CustomNotFound("Couldn't find post to update.");
   }
 }
 
@@ -61,7 +61,7 @@ async function deletePost(postId) {
     });
   } catch (err) {
     console.log(err);
-    throw new PostNotFound("Could't find post to delete");
+    throw new CustomNotFound("Could't find post to delete");
   }
 }
 
@@ -83,7 +83,7 @@ async function getAllComments(postId) {
   } catch (err) {
     console.log(err);
     // Not sure if needed bcs of how API will be used
-    throw new PostNotFound("Couldn't find post.");
+    throw new CustomNotFound("Couldn't find post.");
   }
 }
 
@@ -99,7 +99,24 @@ async function createComment(postId, username, content) {
   } catch (err) {
     console.log(err);
     // Not sure if needed bcs of how API will be used
-    throw new PostNotFound("Couldn't find post to add comment to.");
+    throw new CustomNotFound("Couldn't find post to add comment to.");
+  }
+}
+
+async function updateComment(commentId, content) {
+  try {
+    return await client.comment.update({
+      where: {
+        id: commentId,
+      },
+      data: {
+        content: content,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    // Not sure if needed bcs of how API will be used
+    throw new CommentNotFound("Couldn't find comment to update.");
   }
 }
 
@@ -112,4 +129,5 @@ module.exports = {
   deletePost,
   getAllComments,
   createComment,
+  updateComment,
 };

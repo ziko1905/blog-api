@@ -82,6 +82,22 @@ async function getAllComments(postId) {
   }
 }
 
+async function createComment(postId, username, content) {
+  try {
+    return await client.comment.create({
+      data: {
+        content: content,
+        userName: username,
+        postId: postId,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    // Not sure if needed bcs of how API will be used
+    throw new PostNotFound("Couldn't find post to add comment to.");
+  }
+}
+
 module.exports = {
   ...module.exports,
   getAllPosts,
@@ -90,4 +106,5 @@ module.exports = {
   findPostByTitle,
   deletePost,
   getAllComments,
+  createComment,
 };

@@ -1,13 +1,31 @@
 const express = require("express");
 const app = express();
-const routes = require("./routers");
+const routes = require("./routes");
+const queries = require("./db/queries");
 require("dotenv").config();
 
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", routes.authRouter);
-app.use("/users", routes.userRouter);
+// Temporary till JWT is implemented
+app.use(async (req, res, next) => {
+  try {
+    req.user = await queries.createTest();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+// WIP: commented till developed
+// app.use("/", routes.authRouter);
+// app.use("/users", routes.userRouter);
 app.use("/posts", routes.postRouter);
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.send({ msg: "Error occurred on server. Please try again." });
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -19,7 +19,7 @@ app.use(async (req, res, next) => {
 
 // WIP: commented till developed
 // app.use("/", routes.authRouter);
-// app.use("/users", routes.userRouter);
+app.use("/users", routes.userRouter);
 app.use("/posts", routes.postRouter);
 
 app.use((err, req, res, next) => {

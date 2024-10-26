@@ -16,6 +16,32 @@ module.exports.createTest = async () =>
     update: {},
   });
 
+async function getUserByUsername(username) {
+  try {
+    return client.user.findFirst({
+      where: {
+        username: username,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    throw new CustomNotFound(`Couldn't find user with ${username} username.`);
+  }
+}
+
+async function getPostsByUsername(username) {
+  try {
+    return client.post.findMany({
+      where: {
+        userName: username,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    throw new CustomNotFound(`Couldn't find user posts of ${username}.`);
+  }
+}
+
 async function getAllPosts() {
   return await client.post.findMany();
 }
@@ -135,6 +161,8 @@ async function deleteComment(commentId) {
 
 module.exports = {
   ...module.exports,
+  getUserByUsername,
+  getPostsByUsername,
   getAllPosts,
   createPost,
   updatePost,

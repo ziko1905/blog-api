@@ -161,12 +161,13 @@ async function updateComment(commentId, content) {
 
 async function deleteComment(commentId) {
   try {
-    return client.comment.delete({
+    return await client.comment.delete({
       where: {
         id: commentId,
       },
     });
   } catch (err) {
+    console.log("JUST PROVING THAT CATHC IN ASYNC FUNCT QUERY IS WORKING");
     console.log(err);
     throw new CustomNotFound("Couldn't find comment to delete.");
   }

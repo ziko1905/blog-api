@@ -46,6 +46,19 @@ async function getAllPosts() {
   return await client.post.findMany();
 }
 
+async function getPostById(postId) {
+  post = await client.post.findFirst({
+    where: {
+      id: postId,
+    },
+  });
+  if (!post) {
+    throw new CustomNotFound("Couldn't find post you are looking for.");
+  }
+
+  return post;
+}
+
 async function createPost(title, content, username) {
   return await client.post.create({
     data: {
@@ -164,6 +177,7 @@ module.exports = {
   getUserByUsername,
   getPostsByUsername,
   getAllPosts,
+  getPostById,
   createPost,
   updatePost,
   findPostByTitle,

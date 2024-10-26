@@ -21,6 +21,10 @@ module.exports.allPostsGet = asyncHandler(async (req, res) => {
   res.send(await queries.getAllPosts());
 });
 
+module.exports.singlePostGet = asyncHandler(async (req, res) => {
+  res.send(await queries.getPostById(+req.params.postId));
+});
+
 module.exports.createPost = [
   validatePost,
   validationMiddleware,

@@ -1,4 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient, Prisma } = require("@prisma/client");
 const client = new PrismaClient();
 const { CustomNotFound } = require("../errors");
 

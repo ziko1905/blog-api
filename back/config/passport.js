@@ -2,6 +2,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const queries = require("../db/queries");
+const { ExtractJwt, Strategy: JwtStrategy } = require("passport-jwt");
 
 const verifyCallback = async (username, password, done) => {
   try {
@@ -24,3 +25,20 @@ const verifyCallback = async (username, password, done) => {
 };
 
 passport.use(new LocalStrategy(verifyCallback));
+passport.use(
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.SECRET,
+    },
+    async (jwt_payload, done) => {
+      // Could be problematic bcs getUserByUsername throws on empty finds
+      //   Might want to limit jwt user only to id?
+      const user = await queries.getUserByUsername(jwt_payload.user.username);
+      if (!user) {
+        return done(null, false);
+      }
+      done(null, user);
+    }
+  )
+);

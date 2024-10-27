@@ -7,15 +7,7 @@ require("dotenv").config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Temporary till JWT is implemented
-app.use(async (req, res, next) => {
-  try {
-    req.user = await queries.createTest();
-    next();
-  } catch (err) {
-    next(err);
-  }
-});
+require("./config/passport");
 
 app.use("/", routes.authRouter);
 app.use("/users", routes.userRouter);

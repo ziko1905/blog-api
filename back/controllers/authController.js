@@ -3,6 +3,9 @@ const { body, validationResult } = require("express-validator");
 const validationMiddleware = require("../middleware/validationMiddleware");
 const bcrypt = require("bcrypt");
 const queries = require("../db/queries");
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
+require("dotenv").config;
 
 const validateSignup = [
   body("username")
@@ -51,4 +54,28 @@ module.exports.signupPost = [
 
     res.send({ redirect: "/login" });
   }),
+];
+
+module.exports.loginPost = [
+  (req, res, next) => {
+    passport.authenticate(
+      "local",
+      { session: false },
+      function (err, user, info) {
+        if (err) {
+          return next(err);
+        }
+        if (!user) {
+          return res.status(401).send({ message: info.message });
+        }
+        req.user = user;
+        next();
+      }
+    )(req, res, next);
+  },
+  (req, res) => {
+    jwt.sign({ user: req.user }, process.env.SECRET, (err, token) => {
+      res.send({ token: token });
+    });
+  },
 ];

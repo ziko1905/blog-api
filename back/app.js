@@ -1,16 +1,16 @@
 const express = require("express");
 const app = express();
 const routes = require("./routes");
-const queries = require("./db/queries");
 const passport = require("passport");
+const cors = require("cors");
 require("dotenv").config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 require("./config/passport");
-app.use(passport.authenticate("jwt", { session: false }));
 
+app.use(cors());
 app.use("/", routes.authRouter);
 app.use("/users", routes.userRouter);
 app.use("/posts", routes.postRouter);

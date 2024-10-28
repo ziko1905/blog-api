@@ -79,3 +79,10 @@ module.exports.loginPost = [
     });
   },
 ];
+
+module.exports.getIsLogged = [
+  passport.authenticate("jwt", { session: false }),
+  function (req, res) {
+    res.send(req.user);
+  },
+];

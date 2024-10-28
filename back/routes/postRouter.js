@@ -10,7 +10,6 @@ router.use("/:postId/comments", commentRouter);
 router.get(
   "/",
   (req, res, next) => {
-    console.log(req.user);
     next();
   },
   postController.allPostsGet

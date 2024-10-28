@@ -1,13 +1,10 @@
-import { useState } from "react";
-import Homepage from "../components/Homepage";
+import Navbar from "./components/partials/Navbar";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <Homepage />
-      <p>Some random text</p>
+      <Navbar />
+      <p>Homepage text</p>
     </>
   );
 }

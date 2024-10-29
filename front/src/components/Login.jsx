@@ -1,26 +1,7 @@
 import Navbar from "./partials/Navbar";
 import { config } from "../Constants";
 import { useState } from "react";
-
-function ValidateMsgs({ messages = [] }) {
-  return (
-    <>
-      {!!messages.length && (
-        <div className="valid-msg-container">
-          <ul>
-            {messages.map((element, id) => {
-              return (
-                <li key={id} className="valid-msg">
-                  {element}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
-    </>
-  );
-}
+import ValidateMsgs from "./partials/ValidateMsgs";
 
 function Login() {
   const [validatorMsgs, setValidatorMsgs] = useState();
@@ -43,7 +24,9 @@ function Login() {
           setValidatorMsgs(response.messages);
         } else {
           // Either context or passed down user
-          // Where local storage stores token
+          localStorage.setItem("ziko1909-app-token", response.token);
+          console.log("should redirect");
+          window.location.href = "/";
         }
       })
       .catch(() => {

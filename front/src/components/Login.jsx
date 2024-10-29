@@ -8,8 +8,12 @@ function ValidateMsgs({ messages = [] }) {
       {!!messages.length && (
         <div className="valid-msg-container">
           <ul>
-            {messages.map((element) => {
-              return <li className="valid-msg">{element}</li>;
+            {messages.map((element, id) => {
+              return (
+                <li key={id} className="valid-msg">
+                  {element}
+                </li>
+              );
             })}
           </ul>
         </div>
@@ -39,11 +43,11 @@ function Login() {
           setValidatorMsgs(response.messages);
         } else {
           // Either context or passed down user
-          console.log("Hello,", response.user.username);
+          // Where local storage stores token
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        console.error("Redirecting to error page needed.");
       });
   };
 

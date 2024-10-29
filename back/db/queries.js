@@ -39,6 +39,16 @@ async function getUserByUsername(username) {
   return user;
 }
 
+async function getUserByUsernameNoThrow(username) {
+  const user = await client.user.findFirst({
+    where: {
+      username: username,
+    },
+  });
+
+  return user;
+}
+
 async function getUserByEmail(email) {
   const user = await client.user.findFirst({
     where: {
@@ -219,6 +229,7 @@ module.exports = {
   ...module.exports,
   createUser,
   getUserByUsername,
+  getUserByUsernameNoThrow,
   getUserByEmail,
   userExistsByUsername,
   userExistsByEmail,

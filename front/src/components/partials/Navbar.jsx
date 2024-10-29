@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { config } from "../../Constants";
 import { Link } from "react-router-dom";
 import { isAuth } from "../../utils/isAuth";
 
@@ -8,19 +7,6 @@ function Navbar() {
 
   useEffect(() => {
     isAuth(setUser);
-  }, []);
-
-  useEffect(() => {
-    fetch(config.url.BASE_URL + "/posts", { mode: "cors" })
-      .then((response) => {
-        if (response.status != 200) {
-          return;
-        }
-        return response.json();
-      })
-      .then((response) => {
-        console.log(response);
-      });
   }, []);
 
   return (

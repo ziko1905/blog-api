@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const { body } = require("express-validator");
 const validationMiddleware = require("../middleware/validationMiddleware.js");
 const queries = require("../db/queries");
+const { format } = require("date-fns");
 
 const validatePost = [
   body("title")
@@ -18,7 +19,13 @@ const validatePost = [
 ];
 
 module.exports.allPostsGet = asyncHandler(async (req, res) => {
-  res.send(await queries.getAllPosts());
+  const posts = await queries.getAllPosts();
+  res.send(
+    posts.map((post) => {
+      post.creationTime = format(new Date(post.creationTime), "do 'of' MMM, y");
+      return post;
+    })
+  );
 });
 
 module.exports.singlePostGet = asyncHandler(async (req, res) => {

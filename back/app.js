@@ -18,7 +18,7 @@ app.use("/posts", routes.postRouter);
 app.use((err, req, res, next) => {
   console.log(err);
   const statusCode = err.statusCode || 500;
-  res.status(statusCode).send({ msg: err.message });
+  res.status(statusCode).send({ message: err.message });
 });
 
 const PORT = process.env.PORT || 3000;

@@ -1,4 +1,5 @@
-import App from "./src/App";
+import App from "./App";
+import Login from "./components/Login";
 
 const routes = [
   {
@@ -7,7 +8,7 @@ const routes = [
   },
   {
     path: "/login",
-    element: <App />,
+    element: <Login />,
   },
   {
     path: "/signup",

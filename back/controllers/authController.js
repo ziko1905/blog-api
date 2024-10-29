@@ -66,7 +66,7 @@ module.exports.loginPost = [
           return next(err);
         }
         if (!user) {
-          return res.status(401).send({ message: info.message });
+          return res.status(401).send({ messages: [info.message] });
         }
         req.user = user;
         next();

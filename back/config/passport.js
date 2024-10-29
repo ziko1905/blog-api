@@ -6,7 +6,7 @@ const { ExtractJwt, Strategy: JwtStrategy } = require("passport-jwt");
 
 const verifyCallback = async (username, password, done) => {
   try {
-    const user = await queries.getUserByUsername(username);
+    const user = await queries.userExistsByUsername(username);
 
     if (!user) {
       return done(null, false, { message: "Invalid username or password" });

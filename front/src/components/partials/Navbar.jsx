@@ -13,7 +13,7 @@ function Navbar() {
     <>
       <nav>
         <div className="logo">Blog-API</div>
-        <Link to={""}>Posts</Link>
+        <Link to={"/"}>Posts</Link>
         {!user ? (
           <>
             <Link to="/login">Log In</Link>
@@ -21,7 +21,7 @@ function Navbar() {
           </>
         ) : (
           <>
-            <Link to="myblogs">My Blogs</Link>
+            <Link to="/myblogs">My Blogs</Link>
             <Link to="/logout">My Blogs</Link>
           </>
         )}

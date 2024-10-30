@@ -1,8 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const { body } = require("express-validator");
-const validationMiddleware = require("../middleware/validationMiddleware.js");
+const validationMiddleware = require("../middleware/validationMiddleware");
 const queries = require("../db/queries");
 const { format } = require("date-fns");
+const isAuthor = require("../middleware/isAuthor");
 
 const validatePost = [
   body("title")
@@ -33,6 +34,8 @@ module.exports.singlePostGet = asyncHandler(async (req, res) => {
 });
 
 module.exports.createPost = [
+  passport.authenticate("jwt", { session: false }),
+  isAuthor.post,
   validatePost,
   validationMiddleware,
   asyncHandler(async (req, res) => {
@@ -46,6 +49,8 @@ module.exports.createPost = [
 ];
 
 module.exports.updatePost = [
+  passport.authenticate("jwt", { session: false }),
+  isAuthor.post,
   validatePost,
   validationMiddleware,
   asyncHandler(async (req, res) => {
@@ -59,8 +64,12 @@ module.exports.updatePost = [
   }),
 ];
 
-module.exports.deletePost = asyncHandler(async (req, res) => {
-  const postId = +req.params.postId;
-  await queries.deletePost(postId);
-  res.send({ redirect: "/posts" });
-});
+module.exports.deletePost = [
+  passport.authenticate("jwt", { session: false }),
+  isAuthor.post,
+  asyncHandler(async (req, res) => {
+    const postId = +req.params.postId;
+    await queries.deletePost(postId);
+    res.send({ redirect: "/posts" });
+  }),
+];

@@ -1,0 +1,22 @@
+const queries = require("../db/queries");
+const asyncHandler = require("express-async-handler");
+
+module.exports.comment = asyncHandler(async (req, res, next) => {
+  if (
+    !(await queries.isCommentAuthor(req.params.commentId, req.user.userName))
+  ) {
+    return res.send({
+      messages: "You are not authorized to act upon this comment.",
+    });
+  }
+  next();
+});
+
+module.exports.post = asyncHandler(async (req, res, next) => {
+  if (!(await queries.isPostAuthor(req.params.postId, req.user.userName))) {
+    return res.send({
+      messages: "You are not authorized to act upon this post.",
+    });
+  }
+  next();
+});

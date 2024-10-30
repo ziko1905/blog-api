@@ -1,4 +1,4 @@
-const { PrismaClient, Prisma } = require("@prisma/client");
+const { PrismaClient } = require("@prisma/client");
 const client = new PrismaClient();
 const { CustomNotFound } = require("../errors");
 
@@ -225,6 +225,32 @@ async function deleteComment(commentId) {
   }
 }
 
+async function isCommentAuthor(commentId, username) {
+  const commentAuth = await client.user.findFirst({
+    where: {
+      comments: {
+        some: {
+          id: commentId,
+        },
+      },
+    },
+  });
+  return commentAuth.username == username;
+}
+
+async function isPostAuthor(postId, username) {
+  const postAuth = await client.user.findFirst({
+    where: {
+      posts: {
+        some: {
+          id: postId,
+        },
+      },
+    },
+  });
+  return postAuth.username == username;
+}
+
 module.exports = {
   ...module.exports,
   createUser,
@@ -244,4 +270,6 @@ module.exports = {
   createComment,
   updateComment,
   deleteComment,
+  isCommentAuthor,
+  isPostAuthor,
 };

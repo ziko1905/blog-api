@@ -24,7 +24,7 @@ function Login() {
           setValidatorMsgs(response.messages);
         } else {
           // Either context or passed down user
-          localStorage.setItem(import.meta.env.VITE_TOKEN_TIEM, response.token);
+          localStorage.setItem(import.meta.env.VITE_TOKEN_ITEM, response.token);
           console.log("should redirect");
           window.location.href = "/";
         }

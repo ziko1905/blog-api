@@ -32,9 +32,11 @@ passport.use(
       secretOrKey: process.env.SECRET,
     },
     async (jwt_payload, done) => {
-      // Could be problematic bcs getUserByUsername throws on empty finds
+      //   Could be problematic bcs getUserByUsername throws on empty finds
       //   Might want to limit jwt user only to id?
-      const user = await queries.getUserByUsername(jwt_payload.user.username);
+      const user = await queries.getUserByUsernameNoThrow(
+        jwt_payload.user.username
+      );
       if (!user) {
         return done(null, false);
       }

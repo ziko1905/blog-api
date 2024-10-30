@@ -22,7 +22,7 @@ function Navbar() {
         ) : (
           <>
             <Link to="/myblogs">My Blogs</Link>
-            <Link to="/logout">My Blogs</Link>
+            <Link to="/logout">Logout</Link>
           </>
         )}
       </nav>

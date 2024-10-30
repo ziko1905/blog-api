@@ -1,5 +1,5 @@
 function Logout() {
-  localStorage.removeItem("ziko1909-app-token");
+  localStorage.removeItem(import.meta.env.VITE_TOKEN_TIEM);
   window.location.href = "/login";
 }
 

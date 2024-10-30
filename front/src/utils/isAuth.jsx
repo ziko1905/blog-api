@@ -4,7 +4,9 @@ export async function isAuth(callBack) {
   return await fetch(config.url.BASE_URL + "/logged", {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("ziko1909-app-token")}`,
+      Authorization: `Bearer ${localStorage.getItem(
+        import.meta.env.VITE_TOKEN_TIEM
+      )}`,
     },
   })
     .then((response) => response.json())

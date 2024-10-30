@@ -24,7 +24,7 @@ function Login() {
           setValidatorMsgs(response.messages);
         } else {
           // Either context or passed down user
-          localStorage.setItem("ziko1909-app-token", response.token);
+          localStorage.setItem(import.meta.env.VITE_TOKEN_TIEM, response.token);
           console.log("should redirect");
           window.location.href = "/";
         }

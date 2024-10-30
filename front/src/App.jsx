@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "./components/partials/Navbar";
-import Post from "./components/partials/Post";
+import Post from "./components/partials/PostItem";
 import { config } from "./Constants";
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
             userName={post.userName}
             creationTime={post.creationTime}
             content={post.content}
+            id={post.id}
           />
         );
       })}

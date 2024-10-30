@@ -2,6 +2,7 @@ import App from "./App";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Logout from "./components/Logout";
+import Post from "./components/Post";
 
 const routes = [
   {
@@ -19,6 +20,10 @@ const routes = [
   {
     path: "/logout",
     element: <Logout />,
+  },
+  {
+    path: "/posts/:postId",
+    element: <Post />,
   },
 ];
 

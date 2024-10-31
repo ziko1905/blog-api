@@ -1,6 +1,6 @@
 import { config } from "../Constants";
 
-export async function isAuth(callBack) {
+export async function isAuth() {
   return await fetch(config.url.BASE_URL + "/logged", {
     headers: {
       "Content-Type": "application/json",
@@ -13,9 +13,7 @@ export async function isAuth(callBack) {
       if (response.status != 401) return response.json();
     })
     .then((response) => {
-      if (response) {
-        callBack(response);
-      }
+      return response;
     })
     .catch((err) => {
       console.log(err);

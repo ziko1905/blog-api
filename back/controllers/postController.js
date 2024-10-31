@@ -4,6 +4,7 @@ const validationMiddleware = require("../middleware/validationMiddleware");
 const queries = require("../db/queries");
 const { format } = require("date-fns");
 const isAuthor = require("../middleware/isAuthor");
+const passport = require("passport");
 
 const validatePost = [
   body("title")

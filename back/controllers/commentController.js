@@ -3,6 +3,7 @@ const queries = require("../db/queries");
 const { body, validationResult } = require("express-validator");
 const validationMiddleware = require("../middleware/validationMiddleware");
 const isAuthor = require("../middleware/isAuthor");
+const passport = require("passport");
 
 validateComment = [
   body("content").trim().notEmpty().withMessage("Comment can't be empty"),
@@ -14,9 +15,14 @@ module.exports.getAllComments = asyncHandler(async (req, res) => {
 
 module.exports.createComment = [
   passport.authenticate("jwt", { session: false }),
+  (req, res, next) => {
+    console.log("BEFORE PASSPORT");
+    next();
+  },
   validateComment,
   validationMiddleware,
   asyncHandler(async (req, res) => {
+    console.log(req);
     return res.send(
       await queries.createComment(
         +req.params.postId,

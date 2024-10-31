@@ -6,7 +6,9 @@ function Navbar() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    isAuth(setUser);
+    isAuth().then((resUser) => {
+      setUser(resUser);
+    });
   }, []);
 
   return (

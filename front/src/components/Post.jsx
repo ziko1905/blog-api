@@ -8,6 +8,7 @@ function Post() {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState(null);
+  const [rerenderComments, setRerender] = useState(false);
 
   useEffect(() => {
     fetch(config.url.BASE_URL + `/posts/${postId}`)
@@ -30,7 +31,7 @@ function Post() {
           setComments(response);
         }
       });
-  }, []);
+  }, [rerenderComments]);
   return (
     <>
       <Navbar />
@@ -42,7 +43,9 @@ function Post() {
             <span>{post.creationTime}</span>
           </div>
           <p>{post.content}</p>
-          {comments && <CommentList comments={comments} />}
+          {comments && (
+            <CommentList rerenderCallback={setRerender} comments={comments} />
+          )}
         </div>
       )}
     </>

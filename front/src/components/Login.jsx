@@ -1,4 +1,3 @@
-import Navbar from "./partials/Navbar";
 import { config } from "../Constants";
 import { useState } from "react";
 import ValidateMsgs from "./partials/ValidateMsgs";
@@ -35,7 +34,6 @@ function Login() {
 
   return (
     <>
-      <Navbar />
       <div className="login-container">
         <ValidateMsgs messages={validatorMsgs} />
         <form onSubmit={handleSubmit} method="POST">

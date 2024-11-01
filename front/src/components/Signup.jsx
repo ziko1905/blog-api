@@ -1,4 +1,3 @@
-import Navbar from "./partials/Navbar";
 import ValidateMsgs from "./partials/ValidateMsgs";
 import { config } from "../Constants";
 import { useState } from "react";
@@ -35,7 +34,6 @@ function Signup() {
 
   return (
     <>
-      <Navbar />
       <div className="signup-container">
         <ValidateMsgs messages={validatorMsgs} />
         <form onSubmit={handleSubmit} method="POST">

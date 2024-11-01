@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "./partials/Navbar";
 import { config } from "../Constants";
 import CommentList from "./partials/CommentList";
 
@@ -34,7 +33,6 @@ function Post() {
   }, [rerenderComments]);
   return (
     <>
-      <Navbar />
       {post && (
         <div className="post">
           <h2>{post.title}</h2>

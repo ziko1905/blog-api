@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { isAuth } from "../../utils/isAuth";
+import { UserContext } from "../../Contexts";
 
 function Navbar() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    isAuth().then((resUser) => {
-      setUser(resUser);
-    });
-  }, []);
+  const { user } = useContext(UserContext);
 
   return (
     <>

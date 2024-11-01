@@ -1,9 +1,16 @@
 import { config } from "../Constants";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import ValidateMsgs from "./partials/ValidateMsgs";
+import { UserContext } from "../Contexts";
+import { isAuth } from "../utils/isAuth";
 
 function Login() {
   const [validatorMsgs, setValidatorMsgs] = useState();
+  const { user, setUser } = useContext(UserContext);
+
+  if (user) {
+    return (window.location.href = "/");
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,8 +29,10 @@ function Login() {
         if (response.messages) {
           setValidatorMsgs(response.messages);
         } else {
-          // Either context or passed down user
           localStorage.setItem(import.meta.env.VITE_TOKEN_ITEM, response.token);
+          isAuth().then((loggedUser) => {
+            setUser(loggedUser);
+          });
           window.location.href = "/";
         }
       })

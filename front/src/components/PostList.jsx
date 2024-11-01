@@ -19,7 +19,6 @@ function PostList() {
   }, []);
 
   function handlePostsChange() {
-    console.log("HANDLING CHANGE");
     fetch(config.url.BASE_URL + "/posts", { mode: "cors" })
       .then((response) => {
         if (response.status != 200) {

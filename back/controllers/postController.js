@@ -42,7 +42,9 @@ module.exports.createPost = [
     const post = await queries.createPost(
       req.body.title,
       req.body.content,
-      req.user.username
+      req.user.username,
+      // Published might be unidentified in which case default value is used
+      req.body.published
     );
     res.send({ redirect: `${req.baseUrl}/${post.id}` });
   }),

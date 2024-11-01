@@ -112,11 +112,12 @@ async function getPostById(postId) {
   return post;
 }
 
-async function createPost(title, content, username) {
+async function createPost(title, content, username, published) {
   return await client.post.create({
     data: {
       title: title,
       content: content,
+      published: published,
       User: {
         connect: {
           username: username,

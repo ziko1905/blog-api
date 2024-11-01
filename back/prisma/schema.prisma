@@ -30,6 +30,7 @@ model Post {
   content      String
   comments     Comment[]
   creationTime DateTime  @default(now())
+  published    Boolean   @default(true)
 
   @@unique([id, userName])
 }

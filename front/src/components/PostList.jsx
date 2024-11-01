@@ -18,11 +18,26 @@ function PostList() {
       });
   }, []);
 
+  function handlePostsChange() {
+    console.log("HANDLING CHANGE");
+    fetch(config.url.BASE_URL + "/posts", { mode: "cors" })
+      .then((response) => {
+        if (response.status != 200) {
+          return;
+        }
+        return response.json();
+      })
+      .then((fetchedPosts) => {
+        setPosts(fetchedPosts);
+      });
+  }
+
   return (
     <>
       {posts.map((post) => {
         return (
           <Post
+            handlePostsChange={handlePostsChange}
             key={post.id}
             title={post.title}
             userName={post.userName}

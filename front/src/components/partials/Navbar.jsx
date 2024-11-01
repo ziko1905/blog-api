@@ -17,6 +17,7 @@ function Navbar() {
           </>
         ) : (
           <>
+            <span>Hello, {user.username}</span>
             <Link to="/myblogs">My Blogs</Link>
             <Link to="/logout">Logout</Link>
           </>

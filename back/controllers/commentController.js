@@ -16,13 +16,11 @@ module.exports.getAllComments = asyncHandler(async (req, res) => {
 module.exports.createComment = [
   passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
-    console.log("BEFORE PASSPORT");
     next();
   },
   validateComment,
   validationMiddleware,
   asyncHandler(async (req, res) => {
-    console.log(req);
     return res.send(
       await queries.createComment(
         +req.params.postId,

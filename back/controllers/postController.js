@@ -36,7 +36,6 @@ module.exports.singlePostGet = asyncHandler(async (req, res) => {
 
 module.exports.createPost = [
   passport.authenticate("jwt", { session: false }),
-  isAuthor.post,
   validatePost,
   validationMiddleware,
   asyncHandler(async (req, res) => {
@@ -70,7 +69,7 @@ module.exports.deletePost = [
   isAuthor.post,
   asyncHandler(async (req, res) => {
     const postId = +req.params.postId;
-    await queries.deletePost(postId);
-    res.send({ redirect: "/posts" });
+    await queries.deletePost(+postId);
+    res.status(200).send();
   }),
 ];

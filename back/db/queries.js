@@ -146,13 +146,14 @@ async function updatePost(postId, title, content) {
 
 async function deletePost(postId) {
   try {
-    return await client.post.delete({
+    const deleted = await client.post.delete({
       where: {
         id: postId,
       },
     });
+    return deleted;
   } catch (err) {
-    console.log(err);
+    console.lof(err);
     throw new CustomNotFound("Could't find post to delete");
   }
 }
@@ -248,6 +249,9 @@ async function isPostAuthor(postId, username) {
       },
     },
   });
+  if (!postAuth) {
+    throw new CustomNotFound("Couldn't find post to delete");
+  }
   return postAuth.username == username;
 }
 

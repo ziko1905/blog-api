@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Post({ title, content, creationTime, published, id, resetCallback }) {
   async function handlePublishChange(e) {
@@ -48,6 +49,7 @@ function Post({ title, content, creationTime, published, id, resetCallback }) {
 }
 
 function PostList() {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     resetPosts();
@@ -73,8 +75,13 @@ function PostList() {
       });
   }
 
+  function handleNew() {
+    navigate("/posts/create");
+  }
+
   return (
     <>
+      <button onClick={handleNew}>Create New</button>
       {!!posts.length && (
         <div className="posts-list">
           {posts.map((p) => {

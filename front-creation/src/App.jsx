@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import loadFromOuterStorage from "./utils/loadFromOuterStorage";
+import Navbar from "./components/partials/Navbar";
 
 let isCalled = false;
 
@@ -16,7 +17,7 @@ function App() {
         src={`${import.meta.env.VITE_SHOWCASE_URL}/iframe`}
         style={{ display: "none" }}
       ></iframe>
-      <div>Here should be common elems</div>
+      <Navbar />
       <Outlet />
     </>
   );

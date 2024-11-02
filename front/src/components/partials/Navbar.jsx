@@ -18,7 +18,7 @@ function Navbar() {
         ) : (
           <>
             <span>Hello, {user.username}</span>
-            <Link to="/myblogs">My Blogs</Link>
+            <a href={import.meta.env.VITE_EDIT_URL}>My Blogs</a>
             <Link to="/logout">Logout</Link>
           </>
         )}

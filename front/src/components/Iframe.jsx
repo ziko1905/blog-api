@@ -1,7 +1,6 @@
 let isCalled = false;
 
 function Iframe() {
-  console.log("HERE IS IFRAME");
   if (!isCalled) {
     isCalled = true;
     window.parent.postMessage(

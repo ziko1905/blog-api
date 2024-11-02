@@ -10,7 +10,7 @@ const validatePost = [
   body("title")
     .trim()
     .notEmpty()
-    .withMessage("Cant be empty!")
+    .withMessage("Title can't be empty!")
     .isLength({ max: 255 })
     .custom(async (value) => {
       if (await queries.findPostByTitle(value)) {
@@ -29,6 +29,22 @@ module.exports.allPostsGet = asyncHandler(async (req, res) => {
     })
   );
 });
+
+module.exports.getUserPosts = [
+  passport.authenticate("jwt", { session: false }),
+  asyncHandler(async (req, res) => {
+    const posts = await queries.getPostsByUsername(req.user.username, false);
+    res.send(
+      posts.map((post) => {
+        post.creationTime = format(
+          new Date(post.creationTime),
+          "do 'of' MMM, y"
+        );
+        return post;
+      })
+    );
+  }),
+];
 
 module.exports.singlePostGet = asyncHandler(async (req, res) => {
   res.send(await queries.getPostById(+req.params.postId));

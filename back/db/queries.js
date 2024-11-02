@@ -78,13 +78,24 @@ async function userExistsByEmail(email) {
   }));
 }
 
-async function getPostsByUsername(username) {
+async function getPostsByUsername(username, published = true) {
   const user = await client.user.findFirst({
     where: {
       username: username,
     },
     include: {
-      posts: true,
+      posts: {
+        where: {
+          OR: [
+            {
+              published: true,
+            },
+            {
+              published: published,
+            },
+          ],
+        },
+      },
     },
   });
 
@@ -96,7 +107,11 @@ async function getPostsByUsername(username) {
 }
 
 async function getAllPosts() {
-  return await client.post.findMany();
+  return await client.post.findMany({
+    where: {
+      published: true,
+    },
+  });
 }
 
 async function getPostById(postId) {

@@ -7,13 +7,6 @@ function PostCreate() {
   const [messages, setMessages] = useState();
 
   function handleCreation(isPublished = true) {
-    console.log(
-      JSON.stringify({
-        title: title,
-        content: content,
-        publish: isPublished,
-      })
-    );
     fetch(`${import.meta.env.VITE_BACKEND_URL}/posts`, {
       mode: "cors",
       method: "POST",

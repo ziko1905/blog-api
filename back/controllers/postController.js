@@ -30,16 +30,14 @@ module.exports.allPostsGet = asyncHandler(async (req, res) => {
   );
 });
 
-module.exports.getUserPosts = [
+module.exports.getUserPrivatePosts = [
   passport.authenticate("jwt", { session: false }),
   asyncHandler(async (req, res) => {
     const posts = await queries.getPostsByUsername(req.user.username, false);
     res.send(
       posts.map((post) => {
-        post.creationTime = format(
-          new Date(post.creationTime),
-          "do 'of' MMM, y"
-        );
+        const tmp = format(post.creationTime, "do 'of' MMM, y");
+        post.creationTime = tmp;
         return post;
       })
     );
@@ -76,7 +74,24 @@ module.exports.updatePost = [
     const post = await queries.updatePost(
       postId,
       req.body.title,
-      req.body.content
+      req.body.content,
+      req.body.published
+    );
+    res.send(post);
+  }),
+];
+
+module.exports.publishPost = [
+  passport.authenticate("jwt", { session: false }),
+  isAuthor.post,
+  asyncHandler(async (req, res) => {
+    const postId = +req.params.postId;
+    const post = await queries.updatePost(
+      postId,
+      // title and body will always be unidentified
+      req.body.title,
+      req.body.content,
+      req.body.published
     );
     res.send(post);
   }),

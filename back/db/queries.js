@@ -142,7 +142,7 @@ async function createPost(title, content, username, published) {
   });
 }
 
-async function updatePost(postId, title, content) {
+async function updatePost(postId, title, content, published) {
   try {
     return await client.post.update({
       where: {
@@ -152,6 +152,7 @@ async function updatePost(postId, title, content) {
       data: {
         title: title,
         content: content,
+        published: published,
       },
     });
   } catch (err) {

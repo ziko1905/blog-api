@@ -7,7 +7,7 @@ const routes = [
     path: "/",
     element: <App />,
     children: [
-      { index: true, defaultElement: <PostList /> },
+      { index: true, element: <PostList /> },
       { path: "/posts/create", element: <PostCreate /> },
     ],
   },

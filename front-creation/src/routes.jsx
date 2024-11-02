@@ -1,11 +1,15 @@
 import PostCreate from "./components/PostCreate";
 import App from "./App";
+import PostList from "./components/PostList";
 
 const routes = [
   {
     path: "/",
     element: <App />,
-    children: [{ path: "/posts/create", element: <PostCreate /> }],
+    children: [
+      { index: true, defaultElement: <PostList /> },
+      { path: "/posts/create", element: <PostCreate /> },
+    ],
   },
 ];
 

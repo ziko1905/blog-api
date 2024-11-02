@@ -22,9 +22,13 @@ function Post({ title, content, creationTime, published, id, resetCallback }) {
     window.location.href = `/posts/${id}/edit`;
   }
 
+  function handleDetail() {
+    window.location.href = `/posts/${id}`;
+  }
+
   return (
     <>
-      <div className="post-div">
+      <div className="post-div" onClick={handleDetail}>
         <h3>{title}</h3>
         <p>{content}</p>
         <span>{creationTime}</span>

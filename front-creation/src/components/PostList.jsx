@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
 function Post({ title, content, creationTime, published, id, resetCallback }) {
-  async function handlePublishChange() {
+  async function handlePublishChange(e) {
+    e.stopPropagation();
     await fetch(`${import.meta.env.VITE_BACKEND_URL}/posts/${id}/publish`, {
       method: "PUT",
       headers: {
@@ -18,7 +19,8 @@ function Post({ title, content, creationTime, published, id, resetCallback }) {
     resetCallback();
   }
 
-  function handleEdit() {
+  function handleEdit(e) {
+    e.stopPropagation();
     window.location.href = `/posts/${id}/edit`;
   }
 

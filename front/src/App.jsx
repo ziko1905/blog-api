@@ -7,7 +7,6 @@ import { isAuth } from "./utils/isAuth";
 function App() {
   const [user, setUser] = useState();
 
-  console.log(import.meta.env.VITE_BACKEND_URL);
   useEffect(() => {
     isAuth().then((response) => setUser(response));
   }, []);

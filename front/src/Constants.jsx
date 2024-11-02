@@ -1,5 +1,7 @@
 const prod = {
-  url: {},
+  url: {
+    BASE_URL: import.meta.env.VITE_BACKEND_URL,
+  },
 };
 
 const dev = {

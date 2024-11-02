@@ -6,11 +6,13 @@ import Post from "./components/Post";
 import User from "./components/User";
 import PostList from "./components/PostList";
 import Iframe from "./components/Iframe";
+import ErrorPage from "../../front-creation/src/components/ErrorPage";
 
 const routes = [
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -41,6 +43,7 @@ const routes = [
   {
     path: "/iframe",
     element: <Iframe />,
+    errorElement: <ErrorPage />,
   },
 ];
 

@@ -10,7 +10,6 @@ export async function isAuth() {
     },
   })
     .then((response) => {
-      console.log(response);
       if (response.status < 400) return response.json();
     })
     .then((response) => {

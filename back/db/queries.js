@@ -183,6 +183,17 @@ async function findPostByTitle(title) {
   });
 }
 
+async function findPostByTitleExceptSelf(title, id) {
+  return await client.post.findFirst({
+    where: {
+      title,
+      id: {
+        not: id,
+      },
+    },
+  });
+}
+
 async function getAllComments(postId) {
   try {
     return client.comment.findMany({
@@ -286,6 +297,7 @@ module.exports = {
   createPost,
   updatePost,
   findPostByTitle,
+  findPostByTitleExceptSelf,
   deletePost,
   getAllComments,
   createComment,

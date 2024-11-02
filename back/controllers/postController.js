@@ -67,7 +67,24 @@ module.exports.createPost = [
 module.exports.updatePost = [
   passport.authenticate("jwt", { session: false }),
   isAuthor.post,
-  validatePost,
+  [
+    body("title")
+      .trim()
+      .notEmpty()
+      .withMessage("Title can't be empty!")
+      .isLength({ max: 255 })
+      .custom(async (value, { req }) => {
+        if (
+          await queries.findPostByTitleExceptSelf(value, +req.params.postId)
+        ) {
+          throw new Error("Post with this title already exists");
+        }
+      }),
+    body("content")
+      .trim()
+      .notEmpty()
+      .withMessage("Post content can't be empty"),
+  ],
   validationMiddleware,
   asyncHandler(async (req, res) => {
     const postId = +req.params.postId;

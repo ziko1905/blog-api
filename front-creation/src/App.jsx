@@ -15,7 +15,6 @@ function App() {
       <iframe
         className="token-iframe"
         src={`${import.meta.env.VITE_SHOWCASE_URL}/iframe`}
-        style={{ display: "none" }}
       ></iframe>
       <Navbar />
       <Outlet />

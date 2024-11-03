@@ -11,6 +11,8 @@ function Iframe() {
       "*"
     );
   }
+
+  return <h1>This is big iframe!!!</h1>;
 }
 
 export default Iframe;

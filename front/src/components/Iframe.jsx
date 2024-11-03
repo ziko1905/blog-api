@@ -6,7 +6,9 @@ function Iframe() {
     console.log(localStorage.getItem(import.meta.env.VITE_TOKEN_ITEM));
     window.parent.postMessage(
       {
-        token: localStorage.getItem(import.meta.env.VITE_TOKEN_ITEM),
+        token: `${localStorage.getItem(import.meta.env.VITE_TOKEN_ITEM)}, ${
+          import.meta.env.VITE_TOKEN_ITEM
+        }`,
         type: "token",
       },
       "*"

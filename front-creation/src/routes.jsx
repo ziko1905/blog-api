@@ -12,9 +12,9 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <PostList /> },
-      { path: "/posts/create", element: <PostCreate /> },
-      { path: "/posts/:postId", element: <PostDetail /> },
-      { path: "/posts/:postId/edit", element: <PostEdit /> },
+      { path: "posts/create", element: <PostCreate /> },
+      { path: "posts/:postId", element: <PostDetail /> },
+      { path: "posts/:postId/edit", element: <PostEdit /> },
     ],
   },
 ];

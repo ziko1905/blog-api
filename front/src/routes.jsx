@@ -19,29 +19,29 @@ const routes = [
         element: <PostList />,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
       },
       {
-        path: "/signup",
+        path: "signup",
         element: <Signup />,
       },
       {
-        path: "/logout",
+        path: "logout",
         element: <Logout />,
       },
       {
-        path: "/posts/:postId",
+        path: "posts/:postId",
         element: <Post />,
       },
       {
-        path: "/users/:username",
+        path: "users/:username",
         element: <User />,
       },
     ],
   },
   {
-    path: "/iframe",
+    path: "iframe",
     element: <Iframe />,
     errorElement: <ErrorPage />,
   },

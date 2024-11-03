@@ -52,7 +52,7 @@ function PostList() {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    resetPosts();
+    setTimeout(() => resetPosts(), 2000);
   }, []);
 
   function resetPosts() {

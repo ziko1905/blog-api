@@ -66,7 +66,7 @@ function PostList() {
     })
       .then((response) => {
         if (response.status >= 400) {
-          window.location = import.meta.env.VITE_SHOWCASE_URL;
+          // window.location = import.meta.env.VITE_SHOWCASE_URL;
         }
         return response.json();
       })

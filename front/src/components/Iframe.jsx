@@ -3,6 +3,7 @@ let isCalled = false;
 function Iframe() {
   if (!isCalled) {
     isCalled = true;
+    console.log(localStorage.getItem(import.meta.env.VITE_TOKEN_ITEM));
     window.parent.postMessage(
       {
         token: localStorage.getItem(import.meta.env.VITE_TOKEN_ITEM),

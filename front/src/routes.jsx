@@ -5,7 +5,6 @@ import Logout from "./components/Logout";
 import Post from "./components/Post";
 import User from "./components/User";
 import PostList from "./components/PostList";
-import Iframe from "./components/Iframe";
 import ErrorPage from "../../front-creation/src/components/ErrorPage";
 
 const routes = [
@@ -39,11 +38,6 @@ const routes = [
         element: <User />,
       },
     ],
-  },
-  {
-    path: "iframe",
-    element: <Iframe />,
-    errorElement: <ErrorPage />,
   },
 ];
 

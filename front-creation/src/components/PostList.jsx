@@ -52,7 +52,7 @@ function PostList() {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    setTimeout(() => resetPosts(), 2000);
+    resetPosts();
   }, []);
 
   function resetPosts() {
@@ -66,7 +66,7 @@ function PostList() {
     })
       .then((response) => {
         if (response.status >= 400) {
-          // window.location = import.meta.env.VITE_SHOWCASE_URL;
+          navigate("/login");
         }
         return response.json();
       })
